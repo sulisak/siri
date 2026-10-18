@@ -1,6 +1,6 @@
 <?php
 switch ($_SERVER['HTTP_ORIGIN']) {
-    case 'https://c2mposonline.com': case 'https://www.c2mposonline.com':
+    case 'https://svnssoft.com': case 'https://www.svnssoft.com':
     header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
     header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     header('Access-Control-Max-Age: 1000');

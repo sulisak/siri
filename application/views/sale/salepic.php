@@ -1855,7 +1855,7 @@ pregetlistcus()" class="form-control" placeholder="<?php echo $lang_sp_42;?>"
                                         if($_SESSION['logoonslip']=='0'){
                                         ?>
                                         /* <td width="150px">
-                                            <img src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>" width="100px">
+                                            <img ng-src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>" width="100px">
 
                                         </td> */
                                         <?php } ?>
@@ -2182,7 +2182,7 @@ pregetlistcus()" class="form-control" placeholder="<?php echo $lang_sp_42;?>"
                                         if($_SESSION['logoonslip']=='0'){
                                         ?>
                                         /* <td width="150px">
-                                            <img src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>" width="100px">
+                                            <img ng-src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>" width="100px">
 
                                         </td> */
                                         <?php } ?>
@@ -3104,7 +3104,7 @@ echo ''.$lang_endmoney.' ( '.number_format($_SESSION['shift_money_end_old']).' )
 
                                         <center>
                                             <td width="250px" align="center">
-                                                <img src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>" width="200px">
+                                                <img ng-src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>" width="200px">
                                             </td>
                                             </tr>
                                             </table>
@@ -3289,7 +3289,7 @@ echo ''.$lang_endmoney.' ( '.number_format($_SESSION['shift_money_end_old']).' )
                                         <table width="100%">
                                             <tr>
                                                 <td width="150px" align="center">
-                                                    <img src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>"
+                                                    <img ng-src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>"
                                                         style="width: 150px;">
                                                 </td>
                                             </tr>
@@ -3460,7 +3460,7 @@ echo ''.$lang_endmoney.' ( '.number_format($_SESSION['shift_money_end_old']).' )
 
                                         <?php if ($_SESSION['picunderslip'] != ''): ?>
                                         <br />
-                                        <img src="<?php echo $base_url . '/' . $_SESSION['picunderslip']; ?>">
+                                        <img ng-src="<?php echo $base_url . '/' . $_SESSION['picunderslip']; ?>">
                                         <?php endif; ?>
 
                                         <span ng-show="showremarkonslip=='1'">
@@ -4177,7 +4177,7 @@ if($_SESSION['owner_logo']!=''){
                                             <table width="100%">
                                                 <tr>
                                                     <td width="250px" align="center">
-                                                        <img src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>"
+                                                        <img ng-src="<?=$base_url?>/<?=$_SESSION['owner_logo']?>"
                                                             style="width: 200px;">
                                                     </td>
                                                 </tr>
@@ -7018,8 +7018,8 @@ if($_SESSION['owner_vat_status']=='0' || $_SESSION['owner_vat_status']=='1'){
                                                     shift_id: '<?php if(isset($_SESSION['shift_id'])){ echo $_SESSION['shift_id']; }?>'
                                                 }).then(function(response) {
                                                     // Telegram alert is already sent inside Savesale()
-                                                    console.log("Telegram alert sent, data:", response
-                                                        .data);
+                                                    // console.log("Telegram alert sent, data:", response
+                                                    //     .data);
 
 
 
@@ -7031,13 +7031,22 @@ if($_SESSION['owner_vat_status']=='0' || $_SESSION['owner_vat_status']=='1'){
                                                     if ($scope.pay_type == '1' || $scope.pay_type ==
                                                         '4') {
                                                         $.ajax({
-                                                            url: '<?php echo $base_url_local;?>/printer/example/interface/lan.php',
+                                                            url: '/siritest/printer/example/interface/lan.php',
                                                             data: {
                                                                 printer_ul: "1",
                                                                 printer_name: "XP-58",
                                                             },
                                                             type: 'post',
-                                                            success: function(response) {}
+                                                            success: function(response) {
+                                                                console.log(
+                                                                    "Printer response full text:",
+                                                                    response);
+                                                            },
+                                                            error: function(xhr, status,
+                                                            error) {
+                                                                console.error("AJAX Error:",
+                                                                    status, error);
+                                                            }
                                                         });
                                                     }
 
