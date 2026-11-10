@@ -291,6 +291,10 @@ $data['listsale'][$i-1]['savedate'] = $savedate;
 
 $data['listsale'][$i-1]['ID'] = null;
 
+	// CRITICAL FIX: Remove owner_qr so line 800 doesn't crash on INSERT
+    unset($data['listsale'][$i-1]['owner_qr']);
+    // CRITICAL FIX: Remove owner_qr so line 800 doesn't crash on INSERT
+
 $this->salepage_model->Adddetail($data['listsale'][$i-1]);
 
 $this->salepage_model->Updateproductdeletestock($data['listsale'][$i-1]);
@@ -331,48 +335,6 @@ $this->session->set_userdata($newdata);
 	}
 
 
-
-
-
-
-// function Line_stocknoti()
-//       {
-// 	$data = json_decode(file_get_contents("php://input"),true);
-// if(!isset($data)){
-// exit();
-// }
-
-// for($i=1;$i<=count($data['listsale']) ;$i++){
-// 	if($data['listsale'][$i-1]['product_id']!='' && $data['listsale'][$i-1]['product_sale_num']!='0'){
-
-// $stock_less = $this->salepage_model->Line_stocknoti($data['listsale'][$i-1]);
-// //Line notify
-// // if($stock_less !=''){
-// // if($_SESSION['line_stocknoti']=='1'){
-// // 	if($stock_less > 0){ $omgtext = 'ສະຕັອກເຫຼືອນ້ອຍ';}else{$omgtext = 'ສະຕັອກໝົດ';}
-// // $text = $_SESSION['owner_name']."\n++".$omgtext."++\n".$data['listsale'][$i-1]['product_name']."\nເຫຼືອ: ".$stock_less."\nເວລາ " .date('H:i',time());
-// // $this->Line_notify($text);
-// // }
-
-// // }
-// //Line notify
-
-
-//   $getrelationlist = $this->salepage_model->Getrelationlist($data['listsale'][$i-1]['product_id']);
-
-//   //print_r($getrelationlist);
-//   foreach ($getrelationlist as $key => $value) {
-//   //$this->salepage_model->Updateproductdeletestock_relation($header_code,$value['product_id_relation'],$value['product_name_relation'],($value['product_num_relation']*$data['listsale'][$i-1]['product_sale_num']),$data['listsale'][$i-1]['product_id'],$value['product_type_relation']);
-
-//   }
-
-// }
-
-// }
-
-	
-		  
-// 	  }
 
 
   function Savequotation()
@@ -416,24 +378,14 @@ $header_code = str_pad($runnoplus, 5, "0", STR_PAD_LEFT);
 $data['listsale'][$i-1]['ID'] = null;
 
   if($this->salepage_model->Adddetailquotation($data['listsale'][$i-1])){
-  	//$this->salepage_model->Updateproductdeletestock($data['listsale'][$i-1]);
-
-
-    //$getrelationlist = $this->salepage_model->Getrelationlist($data['listsale'][$i-1]['product_id']);
-
-    //print_r($getrelationlist);
-    //foreach ($getrelationlist as $key => $value) {
-    //$this->salepage_model->Updateproductdeletestock_relation($value['product_id_relation'],($value['product_num_relation']*$data['listsale'][$i-1]['product_sale_num']));
-
-    //}
+  	
 
   }
 
 
   if($i==1){
   $this->salepage_model->Addheaderquotation($data);
-  //$price_value = $data['sumsale_price']-$data['discount_last'];
-  //$this->salepage_model->Addmoneychange($data['money_changeto_customer'],$data['money_from_customer'],$price_value);
+  
   }
 
   }
